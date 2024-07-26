@@ -1,0 +1,38 @@
+/* Mobile First */
+.home--cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.home--card--label {
+  cursor: pointer;
+}
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1440px) {
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1900px) {
+}

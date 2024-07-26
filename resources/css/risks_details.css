@@ -1,0 +1,133 @@
+/* Mobile First */
+.risks--details {
+  display: grid;
+}
+
+.risks--details--card {
+  width: 100%;
+}
+
+.risk--details--form {
+  display: grid;
+}
+
+.risk--details--item {
+  display: grid;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.risk--details--item--input {
+  background-color: #f3f3f3;
+  border: 1px solid #4d4d4d;
+  border-radius: 3px;
+  padding: 1px 6px;
+  box-sizing: border-box;
+  display: inline-block;
+  height: fit-content;
+  font-size: 14px;
+}
+
+.risk--details--btn--submit {
+  width: 100%;
+}
+
+.association--cards {
+  display: flex;
+  flex-direction: column;
+}
+
+.association--card {
+  width: 100%;
+}
+
+#association--areas,
+#association--processes {
+  overflow-y: scroll;
+  text-align: start;
+  padding: 5px 10px;
+  height: 250px;
+}
+
+.assoc--item:hover {
+  cursor: pointer;
+}
+
+#context-menu {
+  position: fixed;
+  z-index: 10000;
+  width: 150px;
+  background: #1b1a1a;
+  border-radius: 5px;
+  transform: scale(0);
+  transform-origin: top left;
+}
+
+#context-menu.visible {
+  transform: scale(1);
+  transition: transform 200ms ease-in-out;
+}
+
+#context-menu-item {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+  .risks--details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .risks--details--card {
+    width: 49%;
+  }
+
+  .risk--details--item {
+    display: flex;
+    align-items: center;
+  }
+
+  .risk--details--item--span {
+    width: 30%;
+  }
+
+  .risk--details--item--span span {
+    display: block;
+  }
+
+  .risk--details--item--input {
+    width: 70%;
+  }
+
+  .risk--details--btn--submit {
+    width: fit-content;
+  }
+
+  #association--areas,
+  #association--processes {
+    height: 500px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+
+}

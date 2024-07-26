@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+</IfModule>
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:xPoHP9j2f2
+ErrorDocument 404 /404.html
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE xPoHP9j2f2:ERRORPAGEID
+
+
+
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteBase /soft/
+
+    # Si la solicitud no es un archivo existente, dirígela a index.php
+ #   RewriteCond %{REQUEST_FILENAME} !-f
+ #   RewriteCond %{REQUEST_FILENAME} !-d
+ #   RewriteRule ^(.*)$ /soft/index.php [L]
+
+    # También puedes agregar esta línea si estás utilizando Laravel Mix
+    # RewriteRule ^css/(.*)$ /soft/css/$1 [L]
+#</IfModule>

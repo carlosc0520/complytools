@@ -1,0 +1,243 @@
+/* Mobile First */
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+
+.chart-skills {
+  margin: 0 auto;
+  padding: 0;
+  list-style-type: none;
+}
+
+.chart-skills *,
+.chart-skills::before {
+  box-sizing: border-box;
+}
+
+
+.chart-skills {
+  position: relative;
+  width: 420px;
+  height: 210px;
+  overflow: hidden;
+}
+
+.chart-skills::before,
+.chart-skills::after {
+  position: absolute;
+}
+
+.chart-skills::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  border: 45px solid rgba(211, 211, 211, .3);
+  border-bottom: none;
+  border-top-left-radius: 210px;
+  border-top-right-radius: 210px;
+}
+
+.chart-skills::after {
+  content: 'Scoring';
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: cadetblue;
+}
+
+.chart-skills li {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border: 150px solid;
+  border-top: none;
+  border-bottom-left-radius: 210px;
+  border-bottom-right-radius: 210px;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+}
+
+.chart-skills li:nth-child(1) {
+  z-index: 5;
+  border-color: #FF0505;
+  animation-name: rotate-one;
+}
+
+.chart-skills li:nth-child(2) {
+  z-index: 4;
+  border-color: #F39C12;
+  animation-name: rotate-two;
+  animation-delay: .2s;
+}
+
+.chart-skills li:nth-child(3) {
+  z-index: 3;
+  border-color: #FFEB3B;
+  animation-name: rotate-three;
+  animation-delay: .3s;
+}
+
+.chart-skills li:nth-child(4) {
+  z-index: 2;
+  border-color: #81D742;
+  animation-name: rotate-four;
+  animation-delay: .4s;
+}
+
+.chart-skills li:nth-child(5) {
+  z-index: 1;
+  border-color: #5DADE2;
+  animation-name: rotate-five;
+  animation-delay: .5s;
+}
+
+.chart-skills span {
+  position: absolute;
+  font-size: 16px;
+  backface-visibility: hidden;
+  animation: fade-in .3s linear forwards;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 12px rgb(0 0 0 / 50%);
+}
+
+.chart-skills label {
+  position: absolute;
+  font-size: .85rem;
+  backface-visibility: hidden;
+  animation: fade-in .3s linear forwards;
+  color:white;
+}
+
+.chart-skills li:nth-child(1) span {
+  top: 19px;
+  left: -68px;
+  transform: rotate(-36deg);
+}
+
+.chart-skills li:nth-child(2) span {
+  top: 21px;
+  left: -78px;
+  transform: rotate(-72deg);
+  animation-delay: .2s;
+}
+
+.chart-skills li:nth-child(3) span {
+  top: 36px;
+  left: -81px;
+  transform: rotate(-108deg);
+  animation-delay: .3s;
+}
+
+.chart-skills li:nth-child(4) span {
+  top: 38px;
+  left: -75px;
+  transform: rotate(-144deg);
+  animation-delay: .4s;
+}
+
+.chart-skills li:nth-child(5) span {
+  top: 38px;
+  left: -61px;
+  transform: rotate(-180deg);
+  animation-delay: .5s;
+}
+
+.chart-skills li:nth-child(1) label {
+  top: 33px;
+  left: -83px;
+  transform: rotate(-36deg);
+}
+
+.chart-skills li:nth-child(2) label {
+  top: 29px;
+  left: -68px;
+  transform: rotate(-72deg);
+  animation-delay: .2s;
+}
+
+.chart-skills li:nth-child(3) label {
+  top: 28px;
+  left: -78px;
+  transform: rotate(-108deg);
+  animation-delay: .3s;
+}
+
+.chart-skills li:nth-child(4) label {
+  top: 25px;
+  left: -72px;
+  transform: rotate(-144deg);
+  animation-delay: .4s;
+}
+
+.chart-skills li:nth-child(5) label {
+  top: 19px;
+  left: -88px;
+  transform: rotate(-180deg);
+  animation-delay: .5s;
+}
+
+@keyframes rotate-one {
+  100% { transform: rotate(36deg); }
+}
+
+@keyframes rotate-two {
+  0% { transform: rotate(36deg); }
+  100% { transform: rotate(72deg); }
+}
+
+@keyframes rotate-three {
+  0% { transform: rotate(72deg); }
+  100% { transform: rotate(108deg); }
+}
+
+@keyframes rotate-four {
+  0% { transform: rotate(108deg); }
+  100% { transform: rotate(144deg); }
+}
+
+@keyframes rotate-five {
+  0% { transform: rotate(144deg); }
+  100% { transform: rotate(180deg); }
+}
+
+@keyframes fade-in {
+  0%, 90% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+
+}

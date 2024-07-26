@@ -1,0 +1,11 @@
+#modal {
+  position: fixed;
+  width: 82%;
+  top: calc(42vh);
+}
+
+@media (min-width: 1200px) {
+  #modal {
+    width: 75%;
+  }
+}

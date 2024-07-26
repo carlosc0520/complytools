@@ -1,0 +1,23 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/welcome.js": "/js/welcome.js",
+    "/js/profile.js": "/js/profile.js",
+    "/js/negativelists.js": "/js/negativelists.js",
+    "/js/negativelists-searches.js": "/js/negativelists-searches.js",
+    "/js/risks.js": "/js/risks.js",
+    "/js/risks-generate.js": "/js/risks-generate.js",
+    "/js/risks-details.js": "/js/risks-details.js",
+    "/js/scoring.js": "/js/scoring.js",
+    "/js/scoring-generate-natural.js": "/js/scoring-generate-natural.js",
+    "/js/scoring-generate-company.js": "/js/scoring-generate-company.js",
+    "/js/scoring-details-natural.js": "/js/scoring-details-natural.js",
+    "/js/scoring-details-company.js": "/js/scoring-details-company.js",
+    "/js/complaints.js": "/js/complaints.js",
+    "/js/operations.js": "/js/operations.js",
+    "/js/operations-generate.js": "/js/operations-generate.js",
+    "/js/operations-details.js": "/js/operations-details.js",
+    "/js/reports.js": "/js/reports.js",
+    "/js/reports-generate.js": "/js/reports-generate.js",
+    "/js/reports-details.js": "/js/reports-details.js",
+    "/css/app.css": "/css/app.css"
+}

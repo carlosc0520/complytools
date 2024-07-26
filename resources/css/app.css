@@ -1,0 +1,343 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url("./datatables.css");
+
+@import url("./loading.css");
+
+@import url("./home.css");
+@import url("./profile.css");
+@import url("./negativelists.css");
+@import url("./risks.css");
+@import url("./risks_details.css");
+@import url("./scoring.css");
+@import url("./scoring_details.css");
+@import url("./complaints.css");
+@import url("./reports.css");
+@import url("./operations.css");
+
+/* Mobile First */
+.body-app {
+  min-height: 100vh;
+}
+
+.bg-home {
+  background: linear-gradient(45deg, #000000,#0000),
+    conic-gradient(from 85deg at 47.5% 48.44%,
+      #111b20f5 4deg,
+      #051827de,
+      #0e0530b0 29deg,
+      rgb(204 150 218 / 98%) 45deg,
+      #63507ee3 77deg, #101d26f0 139deg,
+      rgb(52 72 81) 170deg,
+      #64819b 197deg,
+      #547c99f0 189deg,
+      #ffffff 219deg,
+      #4a85a763 252deg,
+      #161f25fa 355deg
+    );
+}
+
+.card-transparent {
+  background-color: rgba(175, 114, 214, 0.09);
+  max-width: 411px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.subcard-transparent {
+  background-color: rgba(40, 38, 38, 0.3);
+}
+
+.modal-alert {
+  max-width: 589px;
+}
+
+.responsive {
+  display: none;
+}
+
+#logo {
+  max-width: 384px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#page-content {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 30px;
+}
+
+#labelSearch {
+  display: none;
+}
+
+.table-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.custom-selects {
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.custom-selects button {
+  width: 300px;
+}
+
+.btn-conoce {
+  background-color: #5500FF;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: none;
+}
+
+.btn-conoce:hover {
+  background-color: #312d2d;
+}
+
+.checkbox-conoce {
+  width: 1.3em;
+  height: 1.3em;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.checkbox-conoce:checked {
+  background-color: #5500FF;
+}
+
+.bg-navbar {
+  background: linear-gradient(90deg, #0C0C0D 2.74%, #007CB0 96.64%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav--span {
+  white-space: nowrap;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 0px !important;
+  color: #ffffff
+}
+
+.nav--span:hover {
+  background-color: white;
+  color: #00BBDC;
+}
+
+.nav--span--divider {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.nav--divider {
+  margin: 0;
+  padding: 0;
+}
+
+.nav--no-hover {
+  color: white;
+}
+
+.divider-horizontal {
+  border: 1px solid #FFFFFF;
+  transform: rotate(-90deg);
+  margin: 0;
+  padding: 0;
+  width: 44px;
+}
+
+.divider-v {
+  width: 1px !important;
+  min-width: 1px !important;
+  height: 45px !important;
+  border-radius: 0px !important;
+  border-left: 1px solid white;
+}
+
+.nav-name:hover {
+  background-color: #007CB0;
+}
+
+.nav--span--divider:hover,
+.nav--no-hover:hover {
+  background-color: white;
+  cursor: default;
+  color:#00BBDC;
+}
+
+.conoce--input {
+  background-color: #f3f3f3;
+  border: 1px solid #4d4d4d;
+  border-radius: 3px;
+  padding: 1px 6px;
+  box-sizing: border-box;
+  display: inline-block;
+  height: fit-content;
+  font-size: 14px;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.vertical-text {
+  writing-mode: vertical-lr;
+  transform: rotate(0.5turn);
+  /*text-align: center;
+  text-align: -moz-center;
+  text-align: -webkit-center;
+  text-align: -ms-center;
+  -webkit-text-align: center;
+  -moz-text-align: center;
+  -ms-text-align: center;*/
+}
+
+.table-conoce {
+  border-collapse: collapse;
+  /*margin: 5px 0;*/
+  margin: 0;
+  font-family: sans-serif;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table-conoce thead tr {
+  /* background-color: #00D5FB;*/
+  background: linear-gradient(90deg, #0C0C0D 2.74%, #007CB0 96.64%);
+  color: #ffffff;
+  text-align: left;
+}
+
+.table-conoce th,
+.table-conoce td {
+  padding: 2px 5px;
+}
+
+.table-conoce td:nth-child(1) {
+  border-left: none !important;
+}
+
+.table-conoce tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.table-conoce tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table-conoce tbody tr:last-of-type {
+  border-bottom: 2px solid linear-gradient(90deg, #0C0C0D 2.74%, #007CB0 96.64%);
+}
+
+.table-conoce tbody tr.active-row {
+  font-weight: bold;
+  color: linear-gradient(90deg, #0C0C0D 2.74%, #007CB0 96.64%);
+}
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+  #page-content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  #labelSearch {
+    display: block;
+  }
+
+  .table-footer {
+    margin-top: 10px;
+  }
+
+  .custom-selects {
+    flex-direction: row;
+  }
+
+  .custom-selects button {
+    width: auto;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+  span.responsive {
+    display: block;
+    width: 80px;
+  }
+
+  .table-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .sidebar.responsive {
+    display: block;
+  }
+
+  .sidebar.responsive li img {
+    width: 20px;
+  }
+
+  .view-table {
+    position: absolute;
+    width: calc(95% - 160px);
+  }
+
+  .table-footer {
+    margin-top: 40px;
+  }
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+  .view-table {
+    position: absolute;
+    width: calc(95% - 160px);
+  }
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1440px) {
+
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1900px) {
+  #page-content {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  .table-footer {
+    margin-top: 0px;
+  }
+}

@@ -1,0 +1,70 @@
+/* Mobile First */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-risks {
+  height: 309px;
+}
+
+.table-risks td:nth-child(1) {
+  width: 15px;
+  font-size:11px;
+  border: none !important;
+}
+
+.table-risks td:not(:nth-child(1)) {
+  border: 1px solid black;
+}
+
+.cell-blank {
+  border: none !important;
+  width: 70px;
+  font-size:11px;
+}
+
+.chart-pie {
+  height: 300px;
+}
+
+.detail-risk,
+#form-risk-inher .item {
+  display: grid;
+}
+
+.risks--graphic {
+  width: 100%;
+}
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .content {
+    flex-direction: row !important;
+    justify-content: space-between;
+  }
+
+  .risks--graphic {
+    width: 48%;
+  }
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+
+}

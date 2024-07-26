@@ -1,0 +1,136 @@
+/* Mobile First */
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+#complaint--modal--details {
+  width: 100%;
+  min-width: 100%;
+}
+
+.complaint--modal--content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complaint--details--item--input {
+  background-color: #f3f3f3;
+  border: 1px solid #4d4d4d;
+  border-radius: 3px;
+  padding: 1px 6px;
+  box-sizing: border-box;
+  display: inline-block;
+  min-height: 24px;
+  font-size: 14px;
+}
+
+#title-md {
+  display: none;
+}
+
+#title-xs {
+  display: flex;
+}
+
+.complaint--item {
+  display: grid;
+}
+
+.complaint--item.many {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complaint--item #files {
+  display: grid;
+  text-align: center;
+}
+
+.complaint--item .complaint--item--sub {
+  display: grid;
+}
+
+.complaint--item.question {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complaint--buttons {
+  display: grid;
+}
+
+.custom-width-col {
+  width: 270px;
+  max-width: 270px;
+  white-space: normal !important;
+}
+
+/*#table-complaints.dataTable td {
+  font-size: 10px;
+}*/
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+  .content {
+    flex-direction: row !important;
+    justify-content: space-between;
+  }
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+  #complaint--modal--details {
+    width: 80%;
+    min-width: 80%;
+  }
+
+  .complaint--item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .complaint--details--item--input {
+    width: 70%;
+  }
+
+  .complaint--item #files {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .complaint--item .complaint--item--sub {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .complaint--item.question {
+    flex-direction: row;
+  }
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+  .complaint--item.many {
+    flex-direction: row;
+  }
+
+  .complaint--item--sub .complaint--details--item--input {
+    width: 200px;
+    margin-left: 10px;
+  }
+}

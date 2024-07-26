@@ -1,0 +1,137 @@
+/* Mobile First */
+.operation-custom-width-col {
+  width: 270px;
+  max-width: 270px;
+  white-space: normal !important;
+}
+
+.operation--content {
+  padding: 6px;
+}
+
+.operation--form {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f3f3;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.operation--item {
+  display: grid;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.operation--col--options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.operation--item--option {
+  display: flex;
+  justify-content: space-between;
+}
+
+.operation--item--span,
+.operation--item--option span {
+  font-size: 14px;
+}
+
+.operation--item--option .operation--item--input {
+  width: 40%;
+}
+
+.operation--item--input {
+  background-color: white;
+  border: 1px solid #4d4d4d;
+  border-radius: 3px;
+  padding: 1px 6px;
+  box-sizing: border-box;
+  display: inline-block;
+  height: fit-content;
+  font-size: 14px;
+}
+
+.operation--btn--submit {
+  width: 100%;
+}
+
+/* Tablet Small */
+@media screen and (min-width: 479px) {
+
+}
+
+/* Tablet */
+@media screen and (min-width: 767px) {
+  .operation--form {
+    padding: 20px;
+  }
+
+  .operation--row, .operation--row--3 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .operation--col {
+    flex-direction: column;
+  }
+
+  .operation--row .operation--col,
+  .operation--row .operation--item {
+    width: 49%;
+  }
+
+  .operation--row--3 .operation--item {
+    width: 29%
+  }
+
+  .operation--col--options {
+    width: 70%;
+  }
+
+  .operation--item--option {
+    justify-content: left;
+  }
+
+  .operation--item--option span {
+    width: 200px;
+  }
+
+  /*.operation--row .operation--item--option input {
+    width: 322px;
+    margin-right: 20px;
+  }*/
+
+  .operation--list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 150px;
+    column-gap: 20px;
+    row-gap: 5px;
+  }
+
+  .operation--list .operation--item--option span {
+    width: 190px;
+    display: flex;
+    align-items: center;
+  }
+
+  .operation--list .operation--item--option input {
+    width: 150px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+}
+
+/* Desktop Large */
+@media screen and (min-width: 1024px) {
+}
+
+/* Desktop Extra Large */
+@media screen and (min-width: 1244px) {
+}

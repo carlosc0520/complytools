@@ -1,0 +1,78 @@
+@import "datatables.net-bs4/css/dataTables.bootstrap4.css";
+@import "datatables.net-buttons-bs4/css/buttons.bootstrap4.css";
+
+/*.table {
+  border-top: 1px solid #686868;
+  border-left: 1px solid #686868;
+}*/
+
+table.dataTable {
+  margin-top: 0px !important;
+}
+
+table.dataTable thead th {
+  border-radius: 0px !important;
+  text-transform: capitalize;
+  background-color: #DFDFDF;
+  border-right: 1px solid #686868 !important;
+  /*border-left: 1px solid #686868 !important;
+  border-top: 1px solid #686868 !important;
+  border-bottom: none;*/
+}
+
+td:nth-child(1) {  
+  border-left: 1px solid #686868 !important;
+}
+
+.table th:first-child {
+  border-left: 1px solid #686868;
+}
+
+/*table.dataTable thead th,*/
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: none !important;
+}
+
+/*table.dataTable thead th,*/
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody td {
+  border-radius: 0px !important;
+  border-bottom: 1px solid #686868 !important;
+  border-right: 1px solid #686868 !important;
+}
+
+/*.dataTables_scroll {
+  height: 56vh;
+}*/
+
+.dataTable tbody tr:hover td {
+  cursor: pointer;
+  background-color: #e5e7eb;
+}
+
+div.dataTables_wrapper {
+  border-top: 1px solid #686868;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.active {
+  background: linear-gradient(to bottom, #585858 0%, #111 100%);
+  color: white !important;
+  /* border: 1px solid #111;*/
+}
+
+.dataTables_filter,
+.dataTables_info {
+  display: none;
+}
+
+/*.dataTables_wrapper .dataTables_processing {
+  position: absolute;
+  bottom: 0% !important;
+  background: #FFFFCC;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-weight: bold;
+}*/
+
+/*table.dataTable td {
+  font-size: 11px;
+}*/
