@@ -583,6 +583,7 @@ class NegativeListsController extends Controller
     )
       ->leftjoin("tbl_busquedauser", "tbl_busquedauser.user", "=", "wp_users.ID")
       ->whereIn("wp_users.ID", $userIds)
+      ->where("wp_users.user_status", 1) 
       ->orderBy("wp_users.display_name", "asc")
       ->get();
 
