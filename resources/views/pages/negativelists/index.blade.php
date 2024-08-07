@@ -252,7 +252,7 @@
     <div class="bg-modal h-8">
     </div>
 
-    <div class="bg-white p-4">
+    <!-- <div class="bg-white p-4">
       <div class="bg-stone-300 w-full rounded-3xl px-2">
         <span class="font-bold">DETALLE:</span>
       </div>
@@ -280,6 +280,9 @@
         <div class="flex my-1"><span class="font-bold">ALIAS: <span id="neglst_alias"></span></span></div>
         <div class="flex my-1"><span class="font-bold">LINK: <div id="neglst_link" class="inline-flex"></div></span></div>
       </div>
+    </div> -->
+    <div id="contenedor-detalle" class="bg-white p-4" style="overflow-y: auto; max-height: 70vh; padding: 0 1rem;">
+      
     </div>
 
     <div class="modal-action justify-end py-2 px-4 bg-modal">

@@ -119,11 +119,69 @@
             <td>ALIAS: {{ $result['data']['alias'] }}</td>
           </tr>
           <tr>
-            <!--<td>LINK: <a href="{{ $result['data']['link'] }}">{{ $result['data']['link'] }}</a></td>-->
             <td>LINK: <span>{{ $result['data']['link'] }}</span></td>
           </tr>
         </tbody>
       </table>
+
+      <!-- // iterar result.data -->
+      <!-- {{
+        $result['data'].map((item, index) => {
+          return (
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="2" style="font-weight: bold">DETALLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TIPO: {{ item.tt }}</td>
+                  <td>CARGO: {{ item.position }}</td>
+                </tr>
+                <tr>
+                  <td>APELLIDOS: {{ item.lastname }}</td>
+                  <td>FECHA DE REGISTRO/NACIMIENTO: {{ item.date_at }}</td>
+                </tr>
+                <tr>
+                  <td>NOMBRES: {{ item.name }}</td>
+                  <td>LUGAR DE NACIMIENTO: {{ item.location }}</td>
+                </tr>
+                <tr>
+                  <td>IDENTIFICACIÓN: {{ item.ruc }}</td>
+                  <td>LISTA: {{ item.type }}</td>
+                </tr>
+                <tr>
+                  <td>PASAPORTE: {{ item.passport }}</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <br>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="font-weight: bold">OBSERVACIONES</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DESCRIPCIÓN: {{ item.other }}</td>
+                </tr>
+                <tr>
+                  <td>ALIAS: {{ item.alias }}</td>
+                </tr>
+                <tr>
+                  <td>LINK: <span>{{ item.link }}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          )
+        })
+      }} -->
+
     </div>
   </body>
 </html>
