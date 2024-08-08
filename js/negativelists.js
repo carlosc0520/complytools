@@ -2574,8 +2574,7 @@
   !*** ./node_modules/jquery/dist/jquery.js ***!
   \********************************************/
             /***/ function (module, exports) {
-                var __WEBPACK_AMD_DEFINE_ARRAY__,
-                    __WEBPACK_AMD_DEFINE_RESULT__;
+                var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                 /*!
                  * jQuery JavaScript Library v3.6.3
                  * https://jquery.com/
@@ -82844,8 +82843,8 @@
             _userId = $("#userId").text();
             console.log($("#userId").text());
             listsNegativeLists();
-            lnLists_search(_table_no_lastname, "not_lastname");
-            lnLists_search(_table_lastname, "same_lastname");
+            lnLists_search(_table_no_lastname, "not_lastname"),
+                lnLists_search(_table_lastname, "same_lastname");
         }
         function loading(flag) {
             if (flag) {
@@ -83161,69 +83160,100 @@
                                         success: function success(response) {
                                             loading(false);
                                             if (response) {
-                                                if (isSearch) increaseSearches();
+                                                if (isSearch)
+                                                    increaseSearches();
 
-												$("#contenedor-detalle").empty();
-												const searches = [
-													...response.searches,
-													{
-														alias:		response.alias,
-														color:		response.color,
-														date_at: 	response.date_at,
-														gender:		response.gender,
-														id:			response.id,
-														lastname:	response.lastname,
-														link:		response.link,
-														location:	response.location,
-														name:		response.name,
-														nation:		response.nation,
-														other:		response.other,
-														passport:	response.passport,
-														position:	response.position,
-														ruc:		response.ruc,
-														tt:			response.tt
-													}
-												]
+                                                $(
+                                                    "#contenedor-detalle"
+                                                ).empty();
+                                                const searches = [
+                                                    ...response.searches,
+                                                ];
 
-												console.log(searches)
-												if (Array.isArray(searches) && searches.length > 0) {
-
-													searches.forEach((search,index) => {
-														let searchHtml = `
+                                                console.log(searches);
+                                                if (
+                                                    Array.isArray(searches) &&
+                                                    searches.length > 0
+                                                ) {
+                                                    searches.forEach(
+                                                        (search, index) => {
+                                                            let searchHtml = `
 															<div class="bg-stone-300 w-full rounded-3xl px-2 my-2">
 																<span class="font-bold">DETALLE:</span>
 															</div>
 															<div class="flex">
 																<div class="grid w-1/2">
-																	<div class="my-1"><span class="font-bold">TIPO: <span class="font-normal">${search.tt === "N" ? "Individual" : "Entidad"}</span></span></div>
-																	<div class="my-1"><span class="font-bold">APELLIDOS: <span class="font-normal">${search.lastname}</span></span></div>
-																	<div class="my-1"><span class="font-bold">NOMBRES: <span class="font-normal">${search.name}</span></span></div>
-																	<div class="my-1"><span class="font-bold">IDENTIFICACIÓN: <span class="font-normal">${search.ruc}</span></span></div>
-																	<div class="my-1"><span class="font-bold">PASAPORTE: <span class="font-normal">${search.passport}</span></span></div>
+																	<div class="my-1"><span class="font-bold">TIPO: <span class="font-normal">${
+                                                                        search.tt ===
+                                                                        "N"
+                                                                            ? "Individual"
+                                                                            : "Entidad"
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">APELLIDOS: <span class="font-normal">${
+                                                                        search.lastname
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">NOMBRES: <span class="font-normal">${
+                                                                        search.name
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">IDENTIFICACIÓN: <span class="font-normal">${
+                                                                        search.ruc
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">PASAPORTE: <span class="font-normal">${
+                                                                        search.passport
+                                                                    }</span></span></div>
 																</div>
 																<div class="grid w-1/2">
-																	<div class="my-1"><span class="font-bold">CARGO: <span class="font-normal">${search.position}</span></span></div>
-																	<div class="my-1"><span class="font-bold">FECHA DE REGISTRO/NACIMIENTO: <span class="font-normal">${search.date_at}</span></span></div>
-																	<div class="my-1"><span class="font-bold">LUGAR DE NACIMIENTO: <span class="font-normal">${search.location}</span></span></div>
-																	<div class="my-1"><span class="font-bold">LISTA: <div class="inline-flex" style="color: ${search.color}; font-weight: 500;">${search.type}</div></span></div>
+																	<div class="my-1"><span class="font-bold">CARGO: <span class="font-normal">${
+                                                                        search.position
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">FECHA DE REGISTRO/NACIMIENTO: <span class="font-normal">${
+                                                                        search.date_at
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">LUGAR DE NACIMIENTO: <span class="font-normal">${
+                                                                        search.location
+                                                                    }</span></span></div>
+																	<div class="my-1"><span class="font-bold">LISTA: <div class="inline-flex" style="color: ${
+                                                                        search.color
+                                                                    }; font-weight: 500;">${
+                                                                search.type
+                                                            }</div></span></div>
 																</div>
 															</div>
 															<div class="bg-stone-300 w-full rounded-3xl px-2 my-2">
 																<span class="font-bold">OBSERVACIONES:</span>
 															</div>
 															<div class="grid">
-																<div class="flex my-1"><span class="font-bold">DESCRIPCIÓN: <span class="font-normal">${search.other}</span></span></div>
-																<div class="flex my-1"><span class="font-bold">ALIAS: <span>${search.alias}</span></span></div>
-																<div class="flex my-1"><span class="font-bold">LINK: <div class="inline-flex" style="color: #5500FF;"><a href="${search.link}" target="_blank" style="color: #5500FF;">${search.link}</a></div></span></div>
+																<div class="flex my-1"><span class="font-bold">DESCRIPCIÓN: <span class="font-normal">${
+                                                                    search.other
+                                                                }</span></span></div>
+																<div class="flex my-1"><span class="font-bold">ALIAS: <span>${
+                                                                    search.alias
+                                                                }</span></span></div>
+																<div class="flex my-1"><span class="font-bold">LINK: <div class="inline-flex" style="color: #5500FF;"><a href="${
+                                                                    search.link
+                                                                }" target="_blank" style="color: #5500FF;">${
+                                                                search.link
+                                                            }</a></div></span></div>
 															</div>
 
-               												${index < searches.length - 1 ? '<hr class="my-2 border-t border-gray-300">' : ''}
+               												${
+                                                                index <
+                                                                searches.length -
+                                                                    1
+                                                                    ? '<hr class="my-2 border-t border-gray-300">'
+                                                                    : ""
+                                                            }
 
 														`;
 
-														$("#contenedor-detalle").append(searchHtml);
-													});
-												}
+                                                            $(
+                                                                "#contenedor-detalle"
+                                                            ).append(
+                                                                searchHtml
+                                                            );
+                                                        }
+                                                    );
+                                                }
                                             }
                                         },
                                         error: function error(
@@ -83231,6 +83261,10 @@
                                             textStatus,
                                             errorThrown
                                         ) {
+                                            console.log({
+                                                textStatus,
+                                                errorThrown,
+                                            });
                                             loading(false);
                                             alert("Status: " + textStatus);
                                             alert("Error: " + errorThrown);
@@ -83305,20 +83339,11 @@
                         return json.data;
                     },
                 },
-                // order: [[0, 'desc']],
                 columns: [
-                    {
-                        data: "id",
-                    },
-                    {
-                        data: "fullname",
-                    },
-                    {
-                        data: "ruc",
-                    },
-                    {
-                        data: "type_color",
-                    },
+                    { data: "id" },
+                    { data: "fullname" },
+                    { data: "ruc" },
+                    { data: "type_color" },
                     {
                         data: "tt",
                         render: function render(data, type) {
@@ -83334,16 +83359,15 @@
                         data: "actions",
                         render: function render(data, type) {
                             if (type === "display") {
-                                var details =
-                                    '\n              <svg id="SVG-show-'
-                                        .concat(
-                                            data,
-                                            '" class="actions h-6 w-6" style="color: #00D5FB" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">\n                <path id="PATH-show-'
-                                        )
-                                        .concat(
-                                            data,
-                                            '" class="actions" stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />\n              </svg>\n            '
-                                        );
+                                var details = '<svg id="SVG-show-'
+                                    .concat(
+                                        data,
+                                        '" class="actions h-6 w-6" style="color: #00D5FB" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">\n                <path id="PATH-show-'
+                                    )
+                                    .concat(
+                                        data,
+                                        '" class="actions" stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />\n              </svg>\n            '
+                                    );
                                 var assign = '<svg id="SVG-pass-'
                                     .concat(
                                         data,
@@ -83351,7 +83375,7 @@
                                     )
                                     .concat(
                                         data,
-                                        '" class="actions" stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />\n            </svg>'
+                                        '" class="actions" stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />\n            '
                                     );
                                 return '<div class="flex justify-center gap-3">'
                                     .concat(details)
@@ -83378,7 +83402,6 @@
                 },
                 scrollY: "53vh",
                 scrollX: true,
-                // <--- Important: Header scrolled
                 scrollCollapse: true,
                 autoWidth: false,
                 paging: true,
@@ -83386,26 +83409,13 @@
                 ordering: true,
                 lengthChange: false,
                 searching: true,
-                // <-- Important: For search third button
                 columnDefs: [
-                    {
-                        className: "text-center",
-                        targets: [0],
-                    },
-                    // targets: "_all",
-                    {
-                        className: "dt-head-center",
-                        targets: "_all",
-                    },
-                    {
-                        orderable: false,
-                        targets: [1, 5],
-                    },
+                    { className: "text-center", targets: [0] },
+                    { className: "dt-head-center", targets: "_all" },
+                    { orderable: false, targets: [1, 5] },
                 ],
                 initComplete: function initComplete() {
-                    setTimeout(function () {
-                        table.DataTable().columns.adjust();
-                    }, 500);
+                    table.DataTable().columns.adjust();
                 },
                 drawCallback: function drawCallback() {
                     if (_isHome) return;
@@ -83440,6 +83450,7 @@
                 },
             });
         }
+
         _table_no_lastname.on(
             "processing.dt",
             function (e, settings, processing) {
