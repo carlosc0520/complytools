@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BusquedaProgramada;
 use App\Models\NegativeListsMeta;
-use App\Models\User;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 use Illuminate\Http\Request;
 
@@ -47,13 +45,20 @@ class ProgramadaController extends Controller
         }
     }
 
-    public function listProgramadas(Request $request)
+    public function listProgramadas(Request $request, $iduser)
     {
         $start = $request->start;
         $length = $request->length;
-
-        $programadas = BusquedaProgramada::orderBy('id', 'desc')->skip($start)->take($length)->get();
-        $total = BusquedaProgramada::count();
+    
+        // Filtrar por IDUSER
+        $query = BusquedaProgramada::where('IDUSER', $iduser);
+    
+        // Obtener los resultados paginados
+        $programadas = $query->orderBy('id', 'desc')->skip($start)->take($length)->get();
+    
+        // Contar el total de registros filtrados
+        $total = $query->count();
+    
         $data = [];
         foreach ($programadas as $index => $programada) {
             $data[] = [
@@ -65,8 +70,7 @@ class ProgramadaController extends Controller
                 'estado' => $programada->ESTADO
             ];
         }
-
-
+    
         return response()->json([
             'draw' => $request->draw,
             'recordsTotal' => $total,
@@ -74,6 +78,7 @@ class ProgramadaController extends Controller
             'data' => $data
         ]);
     }
+    
 
     public function deleteProgramada(Request $request)
     {
@@ -102,8 +107,10 @@ class ProgramadaController extends Controller
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'ccarbajalmt0520@gmail.com';
-            $mail->Password = 'qcigvfwwdyrwelib';
+            // $mail->Username = 'ccarbajalmt0520@gmail.com';
+            // $mail->Password = 'qcigvfwwdyrwelib';
+            $mail->Username = 'formulariocaro@gmail.com';
+            $mail->Password = 'xcumpfimulzqkulx';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
             $mail->CharSet = 'UTF-8';
@@ -111,6 +118,8 @@ class ProgramadaController extends Controller
             $users = DB::table('wp_users as A')
                 ->join('tb_busqueda_programada as B', 'B.IDUSER', '=', 'A.ID')
                 ->where('B.ESTADO', 0)
+                ->where('A.user_email', '!=', '')
+                ->where('A.user_status', 1)
                 ->select('A.ID', 'A.user_email', 'A.display_name')
                 ->groupBy('A.ID', 'A.user_email', 'A.display_name')
                 ->get();
@@ -191,7 +200,7 @@ class ProgramadaController extends Controller
                 }
 
 
-                $mail->setFrom('ccarbajalmt0520@gmail.com', 'Complytools');
+                $mail->setFrom('formulariocaro@gmail.com', 'Complytools');
                 $mail->addAddress($user->user_email, $user->display_name);
                 $mail->isHTML(true);
                 $fechaHoy = date('Y-m-d');
@@ -200,12 +209,17 @@ class ProgramadaController extends Controller
                 $mail->AltBody = strip_tags($htmlBody);
 
                 $mail->send();
+
             }
 
             DB::table('tb_notify_info')->delete();
 
             return response()->json(['status' => true, 'message' => 'Se ha notificado a los usuarios correctamente']);
         } catch (\Throwable $th) {
+            // imrpimir error
+            echo '<pre>';
+            print_r($th);
+            echo '</pre>';
             return response()->json(['status' => false, 'message' => 'Error al enviar el correo: ' . $mail->ErrorInfo]);
         }
     }

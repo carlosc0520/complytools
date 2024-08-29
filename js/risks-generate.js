@@ -49010,7 +49010,17 @@ $("select[name='companyArea']").on('change', function () {
 });
 $("select[name='companyProb']").on('change', function () {
   var _$$children$val;
-  var probId = (_$$children$val = $(this).children("option:selected").val()) !== null && _$$children$val !== void 0 ? _$$children$val : 0;
+  var probId = (
+	_$$children$val = 
+	$(this).children("option:selected").val()
+
+	) !== null && _$$children$val !== void 0 
+	? _$$children$val : 0;
+
+	console.log({
+		probId,
+		children:_$$children$val
+	})
   if (probId > 0) {
     _idxProbInher = probId - 1;
     $('#companyProbText').text(_probs[_idxProbInher]);

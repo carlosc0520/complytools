@@ -122,11 +122,11 @@ class NegativeListsController extends Controller
       "tbl_busqueda.busquedafecha AS created_at",
       "tbl_busqueda.busquedainfo AS idNegativeLists"
     )
-    ->join('tbl_info', 'tbl_info.infoid', '=', 'tbl_busqueda.busquedainfo')
-    ->leftjoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog')
-    ->where('tbl_busqueda.busquedauser', '=', $request->userId)
-    ->orderBy('tbl_busqueda.busquedaid', 'desc')
-    ->get();
+      ->join('tbl_info', 'tbl_info.infoid', '=', 'tbl_busqueda.busquedainfo')
+      ->leftjoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog')
+      ->where('tbl_busqueda.busquedauser', '=', $request->userId)
+      ->orderBy('tbl_busqueda.busquedaid', 'desc')
+      ->get();
 
     $groupedData = [];
     foreach ($data as $item) {
@@ -139,7 +139,7 @@ class NegativeListsController extends Controller
 
     // Obtener los datos agrupados
     $uniqueData = array_values($groupedData);
-    
+
     return datatables()->of($uniqueData)
       ->addIndexColumn()
       ->addColumn('adn', function ($item) {
@@ -315,22 +315,22 @@ class NegativeListsController extends Controller
       $uniqueData = array_values($groupedData);
 
       return datatables()->of($uniqueData)
-      ->addIndexColumn()
-      ->addColumn('adn', function ($item) {
-        $btn = "<div class='flex justify-center'><input id='{$item->id}' type='checkbox' class='checkbox' /></div>";
-        return $btn;
-      })
-      ->addColumn('type_color', function ($item) {
-        $btn = "<div class='flex justify-center'>
+        ->addIndexColumn()
+        ->addColumn('adn', function ($item) {
+          $btn = "<div class='flex justify-center'><input id='{$item->id}' type='checkbox' class='checkbox' /></div>";
+          return $btn;
+        })
+        ->addColumn('type_color', function ($item) {
+          $btn = "<div class='flex justify-center'>
         <span style='color: {$item->color}'>{$item->type}</span>
       </div>";
-        return $btn;
-      })
-      ->addColumn('actions', function ($item) {
-        return $item->id;
-      })
-      ->rawColumns(['adn', 'type_color', 'action'])
-      ->make(true);
+          return $btn;
+        })
+        ->addColumn('actions', function ($item) {
+          return $item->id;
+        })
+        ->rawColumns(['adn', 'type_color', 'action'])
+        ->make(true);
 
       // $subQuery = DB::table('tbl_info')
       //   ->select(DB::raw("MAX(infoid) as max_id"))
@@ -653,7 +653,7 @@ class NegativeListsController extends Controller
     try {
       $negativelist = DB::table('tbl_info')
         ->select(
-          "tbl_info.infoid AS id",
+          // "tbl_info.infoid AS id",
           "tbl_info.infotipo AS tt",
           "tbl_info.infoapellidos AS lastname",
           "tbl_info.infonombres AS name",
@@ -677,7 +677,7 @@ class NegativeListsController extends Controller
       if ($negativelist) {
         $searches = DB::table('tbl_info')
           ->select(
-            "tbl_info.infoid AS id",
+            // "tbl_info.infoid AS id",
             "tbl_info.infotipo AS tt",
             "tbl_info.infoapellidos AS lastname",
             "tbl_info.infonombres AS name",
@@ -699,9 +699,9 @@ class NegativeListsController extends Controller
           ->where('busq.busquedauser', '=', $iduser)
           ->where('tbl_info.infoapellidos', '=', $negativelist->lastname)
           ->where('tbl_info.infonombres', '=', $negativelist->name)
-          ->where('tbl_info.infoidentifica', '=', $negativelist->ruc)
+          // ->where('tbl_info.infoidentifica', '=', $negativelist->ruc)
           ->groupBy(
-            'tbl_info.infoid',
+            // 'tbl_info.infoid',
             'tbl_info.infotipo',
             'tbl_info.infoapellidos',
             'tbl_info.infonombres',
@@ -734,108 +734,105 @@ class NegativeListsController extends Controller
 
   public function detailsPDF($iduser, $id)
   {
-    if (!isset($iduser) && !isset($id)) {
-      return false;
-    }
+    try {
+      if (!isset($iduser) || !isset($id)) {
+        throw new \InvalidArgumentException('User ID and ID must be provided.');
+      }
 
-    $user = User::where("ID", "=", $iduser)->first();
+      $user = User::where("ID", "=", $iduser)->first();
 
-    $negativelist = NegativeLists::select(
-      "tbl_info.infoid AS id",
-      "tbl_info.infotipo AS tt",
-      "tbl_info.infoapellidos AS lastname",
-      "tbl_info.infonombres AS name",
-      "tbl_info.infoprog AS type",
-      "tbl_info.infocargo AS position",
-      "tbl_info.infolink AS link",
-      "tbl_info.infoalias AS alias",
-      "tbl_info.infoidentifica AS ruc",
-      "tbl_info.infopasaporte AS passport",
-      "tbl_info.infonacionalidad AS nation",
-      "tbl_info.infogenero AS gender",
-      "tbl_info.infomas AS other",
-      "tbl_info.infofecha AS date_at",
-      "tbl_info.infolugar AS location",
-      "tbl_tipo.color AS color"
-    )
+      $negative = DB::table('tbl_info')
+      ->select(
+        // "tbl_info.infoid AS id",
+        "tbl_info.infotipo AS tt",
+        "tbl_info.infoapellidos AS lastname",
+        "tbl_info.infonombres AS name",
+        "tbl_info.infoprog AS type",
+        "tbl_info.infocargo AS position",
+        "tbl_info.infolink AS link",
+        "tbl_info.infoalias AS alias",
+        "tbl_info.infoidentifica AS ruc",
+        "tbl_info.infopasaporte AS passport",
+        "tbl_info.infonacionalidad AS nation",
+        "tbl_info.infogenero AS gender",
+        "tbl_info.infomas AS other",
+        "tbl_info.infofecha AS date_at",
+        "tbl_info.infolugar AS location",
+        "tbl_tipo.color AS color"
+      )
       ->where('tbl_info.infoid', '=', $id)
-      ->leftjoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog')
+      ->leftJoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog')
       ->first();
-    // $negativelist = NegativeLists::select(
-    //   "tbl_info.infoid AS id",
-    //   "tbl_info.infotipo AS tt",
-    //   "tbl_info.infoapellidos AS lastname",
-    //   "tbl_info.infonombres AS name",
-    //   "tbl_info.infoprog AS type",
-    //   "tbl_info.infocargo AS position",
-    //   "tbl_info.infolink AS link",
-    //   "tbl_info.infoalias AS alias",
-    //   "tbl_info.infoidentifica AS ruc",
-    //   "tbl_info.infopasaporte AS passport",
-    //   "tbl_info.infonacionalidad AS nation",
-    //   "tbl_info.infogenero AS gender",
-    //   "tbl_info.infomas AS other",
-    //   "tbl_info.infofecha AS date_at",
-    //   "tbl_info.infolugar AS location",
-    //   "tbl_tipo.color AS color"
-    // )
-    //   ->where('tbl_info.infoid', '=', $id)
-    //   ->leftjoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog');
-    // ->first();
 
-    // $searches = NegativeListsMeta::select(
-    //   "tbl_busqueda.busquedaid AS id",
-    //   "tbl_info.infotipo AS tt",
-    //   "tbl_info.infoapellidos AS lastname",
-    //   "tbl_info.infonombres AS name",
-    //   "tbl_info.infoprog AS type",
-    //   "tbl_info.infocargo AS position",
-    //   "tbl_info.infolink AS link",
-    //   "tbl_info.infoalias AS alias",
-    //   "tbl_info.infoidentifica AS ruc",
-    //   "tbl_info.infopasaporte AS passport",
-    //   "tbl_info.infonacionalidad AS nation",
-    //   "tbl_info.infogenero AS gender",
-    //   "tbl_info.infomas AS other",
-    //   "tbl_info.infofecha AS date_at",
-    //   "tbl_info.infolugar AS location",
-    //   "tbl_tipo.color AS color"
-    // )
-    //   ->join('tbl_info', 'tbl_info.infoid', '=', 'tbl_busqueda.busquedainfo')
-    //   ->leftjoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog')
-    //   ->where('tbl_busqueda.busquedauser', '=', $iduser)
-    //   ->where('tbl_busqueda.busquedainfo', '=', $id)
-    //   ->orderBy('tbl_busqueda.busquedaid', 'desc')
-    //   ->get();
+      $searches = DB::table('tbl_info')
+      ->select(
+        // "tbl_info.infoid AS id",
+        "tbl_info.infotipo AS tt",
+        "tbl_info.infoapellidos AS lastname",
+        "tbl_info.infonombres AS name",
+        "tbl_info.infoprog AS type",
+        "tbl_info.infocargo AS position",
+        "tbl_info.infolink AS link",
+        "tbl_info.infoalias AS alias",
+        "tbl_info.infoidentifica AS ruc",
+        "tbl_info.infopasaporte AS passport",
+        "tbl_info.infonacionalidad AS nation",
+        "tbl_info.infogenero AS gender",
+        "tbl_info.infomas AS other",
+        "tbl_info.infofecha AS date_at",
+        "tbl_info.infolugar AS location",
+        "tbl_tipo.color AS color"
+      )
+      ->join('tbl_busqueda as busq', 'tbl_info.infoid', '=', 'busq.busquedainfo')
+      ->leftJoin('tbl_tipo', 'tbl_tipo.name', '=', 'tbl_info.infoprog')
+      ->where('busq.busquedauser', '=', $iduser)
+      ->where('tbl_info.infoapellidos', '=', $negative->lastname)
+      ->where('tbl_info.infonombres', '=', $negative->name)
+      ->where('tbl_info.infoidentifica', '=', $negative->ruc)
+      ->groupBy(
+        // 'tbl_info.infoid',
+        'tbl_info.infotipo',
+        'tbl_info.infoapellidos',
+        'tbl_info.infonombres',
+        'tbl_info.infoprog',
+        'tbl_info.infocargo',
+        'tbl_info.infolink',
+        'tbl_info.infoalias',
+        'tbl_info.infoidentifica',
+        'tbl_info.infopasaporte',
+        'tbl_info.infonacionalidad',
+        'tbl_info.infogenero',
+        'tbl_info.infomas',
+        'tbl_info.infofecha',
+        'tbl_info.infolugar',
+        'tbl_tipo.color'
+      )
+      ->get();
 
-    // $negativelist = $searches->toArray();
-    // if ($negative) {
-    //     $negativelist[] = $negative->toArray();
-    // }
+      
+      
+      $negativelist = $searches->toArray();
+      $path = 'pdfs.neglistdetails';
+      $result = array(
+        "meta" => [
+          "fullname" => isset($user) ? $user->display_name . " " . $user->lastname : '',
+          "created_at" => date("d-m-Y h:i:s A"),
+        ],
+        "data" => $negativelist
+      );
 
-    // if ($searches->count() > 0) {
-    //     $searchesArray = $searches->map(function($item) {
-    //         return $item->toArray();
-    //     })->toArray();
+      view()->share($path, $result);
 
-    //     $negativelist = array_merge($negativelist, $searchesArray);
-    // }
+      $pdf = PDF::loadView($path, ["result" => $result]);
 
-
-    $path = 'pdfs.neglistdetails';
-    $result = array(
-      "meta" => [
-        "fullname" => isset($user) ? $user->display_name . " " . $user->lastname : '',
-        "created_at" => date("d-m-Y h:i:s A"),
-      ],
-      "data" => $negativelist
-    );
-    view()->share($path, $result);
-
-    $pdf = PDF::loadView($path, ["result" => $result]);
-
-    return $pdf->download('Detalle-de-Lista-Negativa.pdf');
+      return $pdf->download('Detalle-de-Lista-Negativa.pdf');
+    } catch (\Exception $e) {
+      // Manejo de errores
+      \Log::error('Error generating PDF: ' . $e->getMessage());
+      return response()->json(['error' => 'Ocurrió un error al generar el PDF. Por favor, intente nuevamente más tarde.'], 500);
+    }
   }
+
 
   public function detailsPDFEmpty($iduser, $search)
   {
@@ -1076,15 +1073,10 @@ class NegativeListsController extends Controller
   // addProgramada requerst, tambein se enviara por form-data infonombres y infoapellidos
   public function addProgramada(Request $request)
   {
-    echo '<pre>';
-    var_dump($request->all());
-    echo '</pre>';
     $info = new NegativeLists();
     $info->infonombres = $request->infonombres;
     $info->infoapellidos = $request->infoapellidos;
     $info->user = $request->userId;
-
-    var_dump($info);
     return $info;
   }
 }

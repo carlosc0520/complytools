@@ -18,9 +18,11 @@ use Session;
 use PDF;
 use DB;
 
-class ComplaintController extends Controller {
+class ComplaintController extends Controller
+{
 
-  public function viewList() {
+  public function viewList()
+  {
     $isLogged = Session::has("loginId");
     if (!$isLogged) {
       return redirect("/");
@@ -31,7 +33,8 @@ class ComplaintController extends Controller {
     return view("pages.complaints.index", compact('userId'));
   }
 
-  public function dtTable(Request $request) {
+  public function dtTable(Request $request)
+  {
     /* SELECT
         dn.id,
         dn.code,
@@ -84,12 +87,12 @@ class ComplaintController extends Controller {
           "tbd_estado.code AS state",
           "tbd_estado.name AS state_name"
         )
-        ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
-        ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
-        ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
-        ->where('tbd_denuncia.tbd_empresa_id', '=', $company->tbd_empresa_id)
-        ->orderBy('tbd_denuncia.id', 'desc')
-        ->get();
+          ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
+          ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
+          ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
+          ->where('tbd_denuncia.tbd_empresa_id', '=', $company->tbd_empresa_id)
+          ->orderBy('tbd_denuncia.id', 'desc')
+          ->get();
       } else {
         $data = Complaint::select(
           "tbd_denuncia.id",
@@ -112,14 +115,14 @@ class ComplaintController extends Controller {
           "tbd_estado.code AS state",
           "tbd_estado.name AS state_name"
         )
-        ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
-        ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
-        ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
-        // ->join('tbd_empresauser', 'tbd_empresauser.tbd_empresa_id', '=', 'tbd_denuncia.tbd_empresauser_id')
-        // ->where('tbd_empresauser.wp_users_id', '=', $userId)
-        ->where('tbd_denuncia.tbd_empresauser_id', '=', $userId)
-        ->orderBy('tbd_denuncia.id', 'desc')
-        ->get();
+          ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
+          ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
+          ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
+          // ->join('tbd_empresauser', 'tbd_empresauser.tbd_empresa_id', '=', 'tbd_denuncia.tbd_empresauser_id')
+          // ->where('tbd_empresauser.wp_users_id', '=', $userId)
+          ->where('tbd_denuncia.tbd_empresauser_id', '=', $userId)
+          ->orderBy('tbd_denuncia.id', 'desc')
+          ->get();
       }
     }
 
@@ -143,7 +146,8 @@ class ComplaintController extends Controller {
       ->make(true);
   }
 
-  public function details($id) {
+  public function details($id)
+  {
     $data = Complaint::select(
       "tbd_denuncia.id",
       "tbd_denuncia.code",
@@ -166,35 +170,35 @@ class ComplaintController extends Controller {
       "tbd_estado.code AS state",
       "tbd_estado.name AS state_name"
     )
-    ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
-    ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
-    ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
-    // ->join('tbd_empresauser', 'tbd_empresauser.tbd_empresa_id', '=', 'tbd_denuncia.tbd_empresauser_id')
-    // ->where('tbd_empresauser.wp_users_id', '=', $request->userId)
-    ->where('tbd_denuncia.id', '=', $id)
-    ->first();
+      ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
+      ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
+      ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
+      // ->join('tbd_empresauser', 'tbd_empresauser.tbd_empresa_id', '=', 'tbd_denuncia.tbd_empresauser_id')
+      // ->where('tbd_empresauser.wp_users_id', '=', $request->userId)
+      ->where('tbd_denuncia.id', '=', $id)
+      ->first();
 
     $relations = ComplaintRelation::select(
-        'tbd_persona.id',
-        'tbd_persona.tipo as type',
-        'tbd_persona.nombre as name',
-        'tbd_persona.dni as identification',
-        'tbd_persona.codigo as code',
-        'tbd_rol.descrip as rol'
-      )
+      'tbd_persona.id',
+      'tbd_persona.tipo as type',
+      'tbd_persona.nombre as name',
+      'tbd_persona.dni as identification',
+      'tbd_persona.codigo as code',
+      'tbd_rol.descrip as rol'
+    )
       ->leftjoin('tbd_rol', 'tbd_rol.id', '=', 'tbd_persona.tbd_rol_id')
       ->where('tbd_persona.tbd_denuncia_id', '=', $id)
       ->get();
     $files = ComplaintFile::select('id', 'base', 'url')->where('tbd_denuncia_id', '=', $id)->get();
     $historial = ComplaintHistorial::select(
-        'tbd_historial.id',
-        'tbd_historial.label',
-        'tbd_historial.message',
-        'tbd_historial.wp_users_id as userId',
-        'wp_users.display_name as fullname',
-        'tbd_historial.tbd_denuncia_id',
-        'tbd_historial.createdAt'
-      )
+      'tbd_historial.id',
+      'tbd_historial.label',
+      'tbd_historial.message',
+      'tbd_historial.wp_users_id as userId',
+      'wp_users.display_name as fullname',
+      'tbd_historial.tbd_denuncia_id',
+      'tbd_historial.createdAt'
+    )
       ->leftjoin('wp_users', 'wp_users.ID', '=', 'tbd_historial.wp_users_id')
       ->where('tbd_historial.tbd_denuncia_id', '=', $id)
       ->orderBy('tbd_historial.id', 'asc')
@@ -207,7 +211,8 @@ class ComplaintController extends Controller {
     return $data;
   }
 
-  public function detailsPDF($iduser, $id) {
+  public function detailsPDF($iduser, $id)
+  {
     if (!isset($iduser) && !isset($id)) {
       return false;
     }
@@ -236,35 +241,35 @@ class ComplaintController extends Controller {
       "tbd_estado.code AS state",
       "tbd_estado.name AS state_name"
     )
-    ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
-    ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
-    ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
-    // ->join('tbd_empresauser', 'tbd_empresauser.tbd_empresa_id', '=', 'tbd_denuncia.tbd_empresauser_id')
-    // ->where('tbd_empresauser.wp_users_id', '=', $request->userId)
-    ->where('tbd_denuncia.id', '=', $id)
-    ->first();
+      ->join('tbd_causa', 'tbd_causa.id', '=', 'tbd_denuncia.tbd_causa_id')
+      ->join('tbd_relacion', 'tbd_relacion.id', '=', 'tbd_denuncia.tbd_relacion_id')
+      ->leftjoin('tbd_estado', 'tbd_estado.code', '=', 'tbd_denuncia.estado')
+      // ->join('tbd_empresauser', 'tbd_empresauser.tbd_empresa_id', '=', 'tbd_denuncia.tbd_empresauser_id')
+      // ->where('tbd_empresauser.wp_users_id', '=', $request->userId)
+      ->where('tbd_denuncia.id', '=', $id)
+      ->first();
 
     $relations = ComplaintRelation::select(
-        'tbd_persona.id',
-        'tbd_persona.tipo as type',
-        'tbd_persona.nombre as name',
-        'tbd_persona.dni as identification',
-        'tbd_persona.codigo as code',
-        'tbd_rol.descrip as rol'
-      )
+      'tbd_persona.id',
+      'tbd_persona.tipo as type',
+      'tbd_persona.nombre as name',
+      'tbd_persona.dni as identification',
+      'tbd_persona.codigo as code',
+      'tbd_rol.descrip as rol'
+    )
       ->leftjoin('tbd_rol', 'tbd_rol.id', '=', 'tbd_persona.tbd_rol_id')
       ->where('tbd_persona.tbd_denuncia_id', '=', $id)
       ->get();
     $files = ComplaintFile::select('id', 'base', 'url')->where('tbd_denuncia_id', '=', $id)->get();
     $historial = ComplaintHistorial::select(
-        'tbd_historial.id',
-        'tbd_historial.label',
-        'tbd_historial.message',
-        'tbd_historial.wp_users_id as userId',
-        'wp_users.display_name as fullname',
-        'tbd_historial.tbd_denuncia_id',
-        'tbd_historial.createdAt'
-      )
+      'tbd_historial.id',
+      'tbd_historial.label',
+      'tbd_historial.message',
+      'tbd_historial.wp_users_id as userId',
+      'wp_users.display_name as fullname',
+      'tbd_historial.tbd_denuncia_id',
+      'tbd_historial.createdAt'
+    )
       ->leftjoin('wp_users', 'wp_users.ID', '=', 'tbd_historial.wp_users_id')
       ->where('tbd_historial.tbd_denuncia_id', '=', $id)
       ->orderBy('tbd_historial.id', 'asc')
@@ -289,7 +294,8 @@ class ComplaintController extends Controller {
     return $pdf->download('Detalle-de-Canal-de-Denuncia.pdf');
   }
 
-  public function createMessage(Request $request) {
+  public function createMessage(Request $request)
+  {
     $user = User::where('ID', '=', $request->userId)->first();
 
     $historial = new ComplaintHistorial();
@@ -302,12 +308,13 @@ class ComplaintController extends Controller {
 
     $historial->fullname = $user->display_name;
 
-    Complaint::where('id', '=', $request->complaintId)->update([ "estado" => 2 ]);
+    Complaint::where('id', '=', $request->complaintId)->update(["estado" => 2]);
 
     return $historial;
   }
 
-  public function setExpirationDate(Request $request) {
+  public function setExpirationDate(Request $request)
+  {
     $complaintId = $request->id;
     $expirationDate = $request->expirationDate;
 
@@ -321,7 +328,8 @@ class ComplaintController extends Controller {
     return $complaint;
   }
 
-  public function close(Request $request) {
+  public function close(Request $request)
+  {
     $complaintId = $request->id;
     $file = $request->file;
 
@@ -341,7 +349,8 @@ class ComplaintController extends Controller {
     return $complaint;
   }
 
-  public function closeIncomplete(Request $request) {
+  public function closeIncomplete(Request $request)
+  {
     $complaintId = $request->id;
     $ownerId = $request->ownerId;
 
@@ -371,16 +380,17 @@ class ComplaintController extends Controller {
     return $complaint;
   }
 
-  public function team($iduser, $complaintid) {
+  public function team($iduser, $complaintid)
+  {
     $company = ComplaintCompany::select("tbd_empresa_id")->where("wp_users_id", '=', $iduser)->first();
     $complaint = Complaint::select("tbd_empresauser_id")->where("id", '=', $complaintid)->first();
 
     $items = ComplaintCompany::select(
-        "tbd_empresauser.id",
-        "tbd_empresauser.tbd_empresa_id as companyId",
-        "tbd_empresauser.wp_users_id as userId",
-        DB::raw("CONCAT(wp_users.display_name,' ',IFNULL(wp_users.lastname,'')) as fullname"),
-      )
+      "tbd_empresauser.id",
+      "tbd_empresauser.tbd_empresa_id as companyId",
+      "tbd_empresauser.wp_users_id as userId",
+      DB::raw("CONCAT(wp_users.display_name,' ',IFNULL(wp_users.lastname,'')) as fullname"),
+    )
       ->join('wp_users', 'wp_users.ID', '=', 'tbd_empresauser.wp_users_id')
       ->where('tbd_empresauser.tbd_empresa_id', '=', $company->tbd_empresa_id)
       ->get();
@@ -395,7 +405,8 @@ class ComplaintController extends Controller {
     return $data;
   }
 
-  public function assign(Request $request) {
+  public function assign(Request $request)
+  {
     $struct = [
       "tbd_empresauser_id" => $request->userId,
       "estado" => 1,
@@ -420,4 +431,230 @@ class ComplaintController extends Controller {
 
     return $complaint;
   }
+
+
+  // * NUEVO
+  public function redirect($iduser)
+  {
+    try {
+      // Obtener la empresa asociada al usuario
+      $company = DB::table('tbd_empresauser')
+        ->join('tbd_empresa', 'tbd_empresa.id', '=', 'tbd_empresauser.tbd_empresa_id')
+        ->select('tbd_empresauser.tbd_empresa_id', 'tbd_empresa.status')
+        ->where('tbd_empresauser.wp_users_id', '=', $iduser)
+        ->where('tbd_empresa.status', '=', 1)
+        ->first();
+
+      // Verificar si se encontró la empresa
+      if ($company) {
+        // Obtener el sitio asociado a la empresa
+        $sitio = DB::table('sitio_denuncias')
+          ->select('link')
+          ->where('idempresa', '=', $company->tbd_empresa_id)
+          ->where('estado', '=', 'A')
+          ->first();
+
+        return response()->json([
+          'company' => $company,
+          'sitio' => $sitio ? $sitio->link : null,
+        ], 200); // Retornar con código de estado 200 (OK)
+      }
+
+      // Si no se encontró la empresa
+      return response()->json([
+        'company' => null,
+        'sitio' => null,
+      ], 404); // Retornar con código de estado 404 (No encontrado)
+
+    } catch (\Exception $e) {
+      // Manejo de excepciones
+      Log::error('Error al obtener datos de empresa o sitio: ' . $e->getMessage());
+
+      return response()->json([
+        'company' => null,
+        'sitio' => null,
+      ], 500); // Retornar con código de estado 500 (Error interno del servidor)
+    }
+  }
+
+  public function setExpirationDateDenuncia(Request $request)
+  {
+    $complaintId = $request->id;
+    $expirationDate = $request->expirationDate;
+
+    try {
+      $affectedRows = DB::table('tbd_denuncias_empresa')
+        ->where('ID', $complaintId)
+        ->update(['FCIERRE' => $expirationDate]);
+
+      if ($affectedRows > 0) {
+        return response()->json(['status' => true, 'message' => 'Expiration date updated successfully'], 200);
+      } else {
+        return response()->json(['status' => false, 'message' => 'No records updated'], 404);
+      }
+    } catch (\Exception $e) {
+      return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
+    }
+  }
+
+  public function detailsFull($id)
+  {
+
+    try {
+      // Obtener la denuncia
+      $query = DB::table('tbd_denuncias_empresa')
+        ->join('tbd_mantenimiento as causa_mantenimiento', 'tbd_denuncias_empresa.CAUSA', '=', 'causa_mantenimiento.ID')
+        ->join('tbd_mantenimiento as relacion_mantenimiento', 'tbd_denuncias_empresa.RELACION', '=', 'relacion_mantenimiento.ID')
+        ->select(
+          'tbd_denuncias_empresa.ID',
+          'tbd_denuncias_empresa.IDEMPRESA',
+          'causa_mantenimiento.DESCRIPCION as CAUSA',
+          'relacion_mantenimiento.DESCRIPCION as RELACION',
+          'tbd_denuncias_empresa.DETALLE',
+          'tbd_denuncias_empresa.DENUNCIANTE',
+          'tbd_denuncias_empresa.DOCUMENTO',
+          'tbd_denuncias_empresa.TELEFONO',
+          'tbd_denuncias_empresa.CORREO',
+          'tbd_denuncias_empresa.FAGREGADO',
+          'tbd_denuncias_empresa.ESTADO',
+          'tbd_denuncias_empresa.FCIERRE'
+        )
+        ->where('tbd_denuncias_empresa.ID', $id)
+        ->orderBy('tbd_denuncias_empresa.ID', 'desc')
+        ->first();
+
+      // Obtener involucrados
+      $involucrados = DB::table('tbd_involucrados')
+        ->join('tbd_mantenimiento as rol_mantenimiento', 'tbd_involucrados.ROL', '=', 'rol_mantenimiento.ID')
+        ->join('tbd_mantenimiento as tipo_mantenimiento', 'tbd_involucrados.TIPOPERSONA', '=', 'tipo_mantenimiento.ID')
+        ->select(
+          'tbd_involucrados.ID',
+          'tbd_involucrados.IDDENUNCIA',
+          'rol_mantenimiento.DESCRIPCION as ROL',
+          'tipo_mantenimiento.DESCRIPCION as TIPOPERSONA',
+          'tbd_involucrados.IDENTIFICADOR',
+          'tbd_involucrados.NOMBRE',
+          'tbd_involucrados.CARGO',
+          'tbd_involucrados.FAGREGADO',
+          'tbd_involucrados.ESTADO'
+        )
+        ->where('tbd_involucrados.IDDENUNCIA', $id)
+        ->orderBy('tbd_involucrados.ID', 'desc')
+        ->get();
+
+      $files = DB::table('tbd_files')
+        ->select('ID', 'IDDENUNCIA', 'NOMBRE', 'FILE', 'FAGREGADO')
+        ->where('IDDENUNCIA', $id)
+        ->orderBy('ID', 'desc')
+        ->get();
+
+      // Verifica si se obtuvo la información
+      if ($query && $involucrados) {
+        return response()->json([
+          'data' => $query,
+          'involucrados' => $involucrados,
+          'files' => $files,
+        ], 200);
+      } else {
+        return response()->json(['status' => false, 'message' => 'No data found'], 404);
+      }
+    } catch (\Exception $e) {
+      return response()->json(['status' => false, 'message' => $e->getMessage()], 500);
+    }
+  }
+
+  public function dtTableSearch(Request $request)
+  {
+      try {
+          // Obtener parámetros de DataTables
+          $userId = $request->input('userId');
+          $page = intval($request->input('start', 0) / $request->input('length', 10)) + 1; 
+          $perPage = intval($request->input('length', 10)); 
+          $searchValue = $request->input('search.value', '');
+  
+          // Buscar empresa asociada al usuario
+          $company = ComplaintCompany::where('wp_users_id', $userId)->first();
+  
+          if (!$company) {
+              return response()->json(['message' => 'Empresa no encontrada para el usuario'], 404);
+          }
+  
+          // Construir consulta
+          $query = DB::table('tbd_denuncias_empresa')
+              ->join('tbd_mantenimiento as causa_mantenimiento', 'tbd_denuncias_empresa.CAUSA', '=', 'causa_mantenimiento.ID')
+              ->join('tbd_mantenimiento as relacion_mantenimiento', 'tbd_denuncias_empresa.RELACION', '=', 'relacion_mantenimiento.ID')
+              ->select(
+                  'tbd_denuncias_empresa.ID',
+                  'tbd_denuncias_empresa.IDEMPRESA',
+                  'causa_mantenimiento.DESCRIPCION as CAUSA',
+                  'relacion_mantenimiento.DESCRIPCION as RELACION',
+                  'tbd_denuncias_empresa.DETALLE',
+                  'tbd_denuncias_empresa.DENUNCIANTE',
+                  'tbd_denuncias_empresa.DOCUMENTO',
+                  'tbd_denuncias_empresa.TELEFONO',
+                  'tbd_denuncias_empresa.CORREO',
+                  'tbd_denuncias_empresa.FAGREGADO',
+                  'tbd_denuncias_empresa.ESTADO',
+                  'tbd_denuncias_empresa.FCIERRE'
+              )
+              ->where('tbd_denuncias_empresa.IDEMPRESA', $company->tbd_empresa_id)
+              ->where('tbd_denuncias_empresa.ESTADO', 'A')
+              ->where('tbd_denuncias_empresa.RECEPTOR', $userId)
+              ->when(!empty($searchValue), function ($query) use ($searchValue) {
+                  return $query->where('DETALLE', 'like', '%' . $searchValue . '%');
+              })
+              ->orderBy('tbd_denuncias_empresa.ID', 'desc');
+  
+          // Obtener total de registros
+          $totalRecords = $query->count();
+              
+          // Obtener datos paginados
+          $data = $query->skip(($page - 1) * $perPage)
+              ->take($perPage)
+              ->get()
+              ->map(function ($item, $index) use ($page, $perPage) {
+                  $item->ROWNUMBER = (($page - 1) * $perPage) + $index + 1;
+                  return $item;
+              });
+  
+          // Formatear datos para DataTable
+          return response()->json([
+              'draw' => intval($request->input('draw', 1)), // draw se usa para mantener la consistencia con DataTables
+              'recordsTotal' => $totalRecords, // Total de registros disponibles
+              'recordsFiltered' => $totalRecords, // Total de registros después del filtrado (puedes ajustar si usas filtros)
+              'data' => $data->map(function ($item) {
+                  return [
+                      'ID' => $item->ID,
+                      'ROWNUMBER' => $item->ROWNUMBER,
+                      'ESTADO' => $item->ESTADO,
+                      'FCIERRE' => $item->FCIERRE,
+                      'FAGREGADO' => $item->FAGREGADO,
+                      'CAUSA' => $item->CAUSA,
+                      'RELACION' => $item->RELACION,
+                      'DETALLE' => $item->DETALLE,
+                      'DENUNCIANTE' => $item->DENUNCIANTE,
+                      'DOCUMENTO' => $item->DOCUMENTO,
+                      'TELEFONO' => $item->TELEFONO,
+                      'CORREO' => $item->CORREO,
+                      'status' => [
+                          'code' => $item->ESTADO,
+                          'closed_at' => $item->FCIERRE,
+                          'created_at' => $item->FAGREGADO,
+                      ],
+                      'actions' => [
+                          'id' => $item->ID,
+                          'status' => $item->ESTADO,
+                      ]
+                  ];
+              }),
+          ]);
+      } catch (\Exception $e) {
+          // Registrar excepción
+          Log::error('Error en dtTableSearch: ' . $e->getMessage());
+  
+          // Responder con error
+          return response()->json(['message' => 'Error al procesar la solicitud', 'error' => $e->getMessage()], 500);
+      }
+  }
+  
 }

@@ -82844,7 +82844,7 @@
             console.log($("#userId").text());
             listsNegativeLists();
             lnLists_search(_table_no_lastname, "not_lastname"),
-                lnLists_search(_table_lastname, "same_lastname");
+            lnLists_search(_table_lastname, "same_lastname");
         }
         function loading(flag) {
             if (flag) {
@@ -83321,135 +83321,124 @@
         /* BEGIN - TABLE LIST NEGATIVE LISTS WITHOUT LASTNAME */
         function lnLists_search(table, typeSearch) {
             table.DataTable({
-                serverSide: true,
-                processing: false,
-                destroy: true,
-                ajax: {
-                    type: "POST",
-                    url: "/api/v1/negativelists/list-datatable-search",
-                    data: function data(d) {
-                        d.typeSearch = typeSearch;
-                        d.userId = $("#userId").text();
-                        d.name = _name;
-                        d.lastname = _lastname;
-                        d.ruc = _ruc;
-                    },
-                    dataSrc: function dataSrc(json) {
-                        console.log(json);
-                        return json.data;
-                    },
+              serverSide: true,
+              processing: false,
+              destroy: true,
+              ajax: {
+                type: 'POST',
+                url: '/api/v1/negativelists/list-datatable-search',
+                data: function data(d) {
+                  d.typeSearch = typeSearch;
+                  d.userId = $('#userId').text();
+                  d.name = _name;
+                  d.lastname = _lastname;
+                  d.ruc = _ruc;
                 },
-                columns: [
-                    { data: "id" },
-                    { data: "fullname" },
-                    { data: "ruc" },
-                    { data: "type_color" },
-                    {
-                        data: "tt",
-                        render: function render(data, type) {
-                            if (type === "display") {
-                                if (data === "N") return "Individual";
-                                else if (data === "J") return "Jurídico";
-                                else return "";
-                            }
-                            return data;
-                        },
-                    },
-                    {
-                        data: "actions",
-                        render: function render(data, type) {
-                            if (type === "display") {
-                                var details = '<svg id="SVG-show-'
-                                    .concat(
-                                        data,
-                                        '" class="actions h-6 w-6" style="color: #00D5FB" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">\n                <path id="PATH-show-'
-                                    )
-                                    .concat(
-                                        data,
-                                        '" class="actions" stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />\n              </svg>\n            '
-                                    );
-                                var assign = '<svg id="SVG-pass-'
-                                    .concat(
-                                        data,
-                                        '" xmlns="http://www.w3.org/2000/svg" class="actions h-6 w-6 text-conoce-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">\n              <path id="PATH-pass-'
-                                    )
-                                    .concat(
-                                        data,
-                                        '" class="actions" stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />\n            '
-                                    );
-                                return '<div class="flex justify-center gap-3">'
-                                    .concat(details)
-                                    .concat(assign, "</div>");
-                            }
-                            return data;
-                        },
-                    },
-                ],
-                language: {
-                    lengthMenu: "Mostrar _MENU_ reg/pág",
-                    zeroRecords: "No hay datos disponibles",
-                    info: "Registro _START_ de _END_ de _TOTAL_",
-                    infoEmpty: "No hay datos disponibles",
-                    search: "Buscar: ",
-                    select: {
-                        rows: "- %d registros seleccionados",
-                    },
-                    infoFiltered: "(Filtrado de _MAX_ registros)",
-                    paginate: {
-                        previous: "<",
-                        next: ">",
-                    },
+                dataSrc: function dataSrc(json) {
+                  return json.data;
+                }
+              },
+              // order: [[0, 'desc']],
+              columns: [{
+                data: 'id'
+              }, {
+                data: 'fullname'
+              }, {
+                data: 'ruc'
+              }, {
+                data: 'type_color'
+              }, {
+                data: 'tt',
+                render: function render(data, type) {
+                  if (type === 'display') {
+                    if (data === 'N') return 'Individual';else if (data === 'J') return 'Jurídico';else return '';
+                  }
+                  return data;
+                }
+              }, {
+                data: 'actions',
+                render: function render(data, type) {
+                  if (type === 'display') {
+                    var details = "\n              <svg id=\"SVG-show-".concat(data, "\" class=\"actions h-6 w-6\" style=\"color: #00D5FB\" xmlns=\"http://www.w3.org/2000/svg\" class=\"h-6 w-6\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n                <path id=\"PATH-show-").concat(data, "\" class=\"actions\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z\" />\n              </svg>\n            ");
+                    var assign = "<svg id=\"SVG-pass-".concat(data, "\" xmlns=\"http://www.w3.org/2000/svg\" class=\"actions h-6 w-6 text-conoce-green\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\">\n              <path id=\"PATH-pass-").concat(data, "\" class=\"actions\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14\" />\n            </svg>");
+                    return "<div class=\"flex justify-center gap-3\">".concat(details).concat(assign, "</div>");
+                  }
+                  return data;
+                }
+              }],
+              language: {
+                lengthMenu: 'Mostrar _MENU_ reg/pág',
+                zeroRecords: 'No hay datos disponibles',
+                info: 'Registro _START_ de _END_ de _TOTAL_',
+                infoEmpty: 'No hay datos disponibles',
+                search: 'Buscar: ',
+                select: {
+                  rows: '- %d registros seleccionados'
                 },
-                scrollY: "53vh",
-                scrollX: true,
-                scrollCollapse: true,
-                autoWidth: false,
-                paging: true,
-                info: false,
-                ordering: true,
-                lengthChange: false,
-                searching: true,
-                columnDefs: [
-                    { className: "text-center", targets: [0] },
-                    { className: "dt-head-center", targets: "_all" },
-                    { orderable: false, targets: [1, 5] },
-                ],
-                initComplete: function initComplete() {
-                    table.DataTable().columns.adjust();
-                },
-                drawCallback: function drawCallback() {
-                    if (_isHome) return;
-                    var page_info = table.DataTable().page.info();
-                    var total = page_info.recordsTotal;
-                    if (typeSearch === "not_lastname") {
-                        $("#res_table_not_lastname").text(total);
-                        _totalSearchedNoLastname = total;
-                    }
-                    if (typeSearch === "same_lastname") {
-                        $("#res_table_lastname").text(total);
-                        _totalSearchedLastname = total;
-                    }
-                    if (
-                        _totalSearchedNoLastname === 0 &&
-                        _totalSearchedLastname === 0
-                    ) {
-                        $("#div_table_empty").show();
-                        $("#div_table_no_lastname").hide();
-                        $("#div_table_lastname").hide();
-                    } else {
-                        if (_totalSearchedNoLastname === 0) {
-                            $("#div_table_empty").show();
-                            $("#div_table_no_lastname").hide();
-                            $("#div_table_lastname").show();
-                        } else {
-                            $("#div_table_empty").hide();
-                            $("#div_table_no_lastname").show();
-                            $("#div_table_lastname").show();
-                        }
-                    }
-                },
+                infoFiltered: '(Filtrado de _MAX_ registros)',
+                paginate: {
+                  previous: "<",
+                  next: ">"
+                }
+              },
+              scrollY: "53vh",
+              scrollX: true,
+              // <--- Important: Header scrolled
+              scrollCollapse: true,
+              autoWidth: false,
+              paging: true,
+              info: false,
+              ordering: true,
+              lengthChange: false,
+              searching: true,
+              // <-- Important: For search third button
+              columnDefs: [{
+                className: "text-center",
+                targets: [0]
+              },
+              // targets: "_all",
+              {
+                className: "dt-head-center",
+                targets: "_all"
+              }, {
+                orderable: false,
+                targets: [1, 5]
+              }],
+              initComplete: function initComplete() {
+                setTimeout(function () {
+                  table.DataTable().columns.adjust();
+                }, 500);
+              },
+              drawCallback: function drawCallback() {
+                if (_isHome) return;
+                var page_info = table.DataTable().page.info();
+                var total = page_info.recordsTotal;
+                if (typeSearch === 'not_lastname') {
+                  $('#res_table_not_lastname').text(total);
+                  _totalSearchedNoLastname = total;
+                }
+                if (typeSearch === 'same_lastname') {
+                  $('#res_table_lastname').text(total);
+                  _totalSearchedLastname = total;
+                }
+                if (_totalSearchedNoLastname === 0 && _totalSearchedLastname === 0) {
+                  $('#div_table_empty').show();
+                  $('#div_table_no_lastname').hide();
+                  $('#div_table_lastname').hide();
+                } else {
+                  if (_totalSearchedNoLastname === 0) {
+                    $('#div_table_empty').show();
+                    $('#div_table_no_lastname').hide();
+                    $('#div_table_lastname').show();
+                  } else {
+                    $('#div_table_empty').hide();
+                    $('#div_table_no_lastname').show();
+                    $('#div_table_lastname').show();
+                  }
+                }
+              }
             });
-        }
+          }
 
         _table_no_lastname.on(
             "processing.dt",

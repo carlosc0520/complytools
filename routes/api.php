@@ -10,6 +10,7 @@ use App\Http\Controllers\NegativeListsController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\ScoringController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\MantenimientosController;
 use App\Http\Controllers\OperationController;
 use App\Http\Controllers\ProgramadaController;
 use App\Http\Controllers\ReportController;
@@ -126,14 +127,18 @@ Route::prefix('v1')->group(function() {
   Route::prefix('/complaint')->group(function() {
     Route::controller(ComplaintController::class)->group(function () {
       Route::post('/list-datatable', 'dtTable');
+      Route::get('/list-datatable-search', 'dtTableSearch');
       Route::get('/details/object/{id}', 'details');
+      Route::get('/details/objectFull/{id}', 'detailsFull');
       Route::get('/details/pdf/{iduser}/{id}', 'detailsPDF');
       Route::post('/historial', 'createMessage');
       Route::post('/set-expiration-date', 'setExpirationDate');
+      Route::post('/set-expiration-date-denuncia', 'setExpirationDateDenuncia');
       Route::post('/close', 'close');
       Route::post('/close-incomplete', 'closeIncomplete');
       Route::get('/team/{iduser}/{complaintid}', 'team');
       Route::put('/team', 'assign');
+      Route::get('/redirect/{iduser}', 'redirect');
     });
   });
 
@@ -158,4 +163,22 @@ Route::prefix('v1')->group(function() {
       Route::post('/assign', 'assign');
     });
   });
+});
+
+
+// API SIN AUTENTICACIÓN
+Route::prefix('ntICAdIGuiREpOUseLdoSeCtuNtH')->group(function() {
+  Route::prefix('/mantenimientos')->group(function() {
+    Route::controller(MantenimientosController::class)->group(function () {
+      Route::get('/list/{idempresa}', 'listMantenimientos');
+      Route::post('/add/{idempresa}', 'addMantenimiento');
+      Route::post('/obtener', 'getDenuncia');
+      Route::post('/addTestigo', 'addTestigo');
+      Route::post('/addDocumento', 'addDocumento');
+      Route::get('/oficiales/{idempresa}', 'getOficiales');
+      Route::get('/downloadFile/{iddoc}', 'getDoc');
+
+    });
+  });
+
 });
